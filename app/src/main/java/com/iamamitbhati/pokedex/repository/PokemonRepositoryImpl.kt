@@ -6,10 +6,8 @@ import com.iamamitbhati.pokedex.data.local.dao.PokemonDao
 import com.iamamitbhati.pokedex.data.remote.PokemonRemoteData
 import com.iamamitbhati.pokedex.model.Pokemon
 import com.iamamitbhati.pokedex.model.PokemonResponse
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.runBlocking
 import retrofit2.Response
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
@@ -39,10 +37,6 @@ class PokemonRepositoryImpl @Inject constructor(
 
             override fun getList(page: Int): List<Pokemon> {
                 return pokemonDao.getPokemonList(page).toDomain()
-            }
-
-            override fun getAllList(page: Int): Flow<List<Pokemon>> {
-                return flowOf(pokemonDao.getAllPokemonList(page).toDomain())
             }
 
         }.asFlow(page).flowOn(ioDispatcher)

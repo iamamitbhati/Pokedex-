@@ -15,14 +15,14 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
             val apiResponse = fetchFromNetwork()
             if (apiResponse.isSuccessful) {
                 processResponse(apiResponse)?.let { saveNetworkResult(it,page) }
-                emitAll(getAllList(page).map {
+                emitAll(flowOf(getList(page)).map {
                     Resource.Success(it)
                 })
             } else {
                 emit(Resource.Failed(apiResponse.message()))
             }
         } else {
-            emitAll(getAllList(page).map { Resource.Success(it) })
+            emitAll(flowOf(getList(page)).map { Resource.Success(it) })
         }
     }
     @WorkerThread
@@ -36,9 +36,6 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
     @MainThread
     protected abstract fun getList(page: Int): ResultType
-
-    @MainThread
-    protected abstract fun getAllList(page: Int): Flow<ResultType>
 
     @MainThread
     protected abstract suspend fun fetchFromNetwork(): Response<RequestType>

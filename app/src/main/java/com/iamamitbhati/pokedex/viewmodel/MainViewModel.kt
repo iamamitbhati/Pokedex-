@@ -12,12 +12,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val currencyRepository: PokemonRepository) :ViewModel() {
-    val stateChange : MutableLiveData<Resource<List<Pokemon>>> = MutableLiveData()
-    fun getPockemon() {
+class MainViewModel @Inject constructor(private val currencyRepository: PokemonRepository) :
+    ViewModel() {
+    val stateChange: MutableLiveData<Resource<List<Pokemon>>> = MutableLiveData()
+    fun getPockemon(page: Int) {
         viewModelScope.launch {
-            currencyRepository.getAllPokemons(page = 0).collect {
-                //TODO: Will add logic here to load and show data to UI
+            currencyRepository.getAllPokemons(page = page).collect {
                 stateChange.postValue(it)
             }
         }

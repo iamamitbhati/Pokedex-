@@ -16,7 +16,7 @@ interface PokemonDao {
     @Query("SELECT * FROM ${PokemonEntity.TABLE_NAME} WHERE page = :page_")
     fun getPokemonList(page_: Int): List<PokemonEntity>
 
-    @Query("SELECT * FROM ${PokemonEntity.TABLE_NAME} WHERE page <= :page_")
+    @Query("SELECT * FROM ${PokemonEntity.TABLE_NAME} WHERE page = :page_")
     fun getAllPokemonList(page_: Int): List<PokemonEntity>
 
 
