@@ -1,6 +1,7 @@
 package com.iamamitbhati.pokedex.data.remote
 
 import com.iamamitbhati.pokedex.data.network.PokeService
+import com.iamamitbhati.pokedex.model.PokemonDetailsEntity
 import com.iamamitbhati.pokedex.model.PokemonResponse
 import retrofit2.Response
 import javax.inject.Inject
@@ -18,5 +19,9 @@ class PokemonRemoteData @Inject constructor(private val pokeService: PokeService
             limit = PAGING_SIZE,
             offset = page * PAGING_SIZE
         )
+    }
+
+    suspend fun getPokemonDetails(name: String): Response<PokemonDetailsEntity>{
+        return pokeService.fetchPokemonDetail(name)
     }
 }
