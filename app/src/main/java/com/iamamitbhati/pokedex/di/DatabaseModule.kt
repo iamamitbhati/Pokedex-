@@ -26,6 +26,11 @@ object DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideExchangeRateDao(pokedexDatabase: PokedexDatabase) = pokedexDatabase.pokemonDao()
+    fun providePokemonListDao(pokedexDatabase: PokedexDatabase) = pokedexDatabase.pokemonDao()
+
+    @Singleton
+    @Provides
+    fun providePokemonDetailDao(pokedexDatabase: PokedexDatabase) =
+        pokedexDatabase.pokemonDetailDao()
 
 }

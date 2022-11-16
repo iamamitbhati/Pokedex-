@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -20,7 +21,7 @@ import com.iamamitbhati.pokedex.viewmodel.MainViewModel
 
 
 class FragmentPokemonList : Fragment() {
-    lateinit var binding: FragmentPokemonBinding
+    private lateinit var binding: FragmentPokemonBinding
     private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var pokemonAdapter: PokemonAdapter
     private var pokemons = ArrayList<Pokemon>()
@@ -44,7 +45,11 @@ class FragmentPokemonList : Fragment() {
     private fun setupView() {
         with(binding) {
             pokemonAdapter = PokemonAdapter(pokemons) { pokemon ->
-                //TODO: Implement click listener on Pokemon list item
+                val directions = FragmentPokemonListDirections.navigateToPokemonDetail(
+                    pokemon.name,
+                    pokemon.getImageUrl()
+                )
+                findNavController().navigate(directions)
             }
             recyclerView.adapter = pokemonAdapter
         }
@@ -91,7 +96,7 @@ class FragmentPokemonList : Fragment() {
     }
 
     private fun loadMore() {
-        mainViewModel.getPockemon(page)
+        mainViewModel.getPokemons(page)
     }
 
     /**
