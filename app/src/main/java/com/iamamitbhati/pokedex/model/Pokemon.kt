@@ -4,7 +4,8 @@ package com.iamamitbhati.pokedex.model
 data class Pokemon(
   var page: Int = 0,
   val name: String,
-  val url: String
+  val url: String,
+  var isFav: Boolean=false
 ) {
 
   fun getImageUrl(): String {

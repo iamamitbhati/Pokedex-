@@ -8,10 +8,12 @@ import com.iamamitbhati.pokedex.data.remote.PokemonRemoteData
 import com.iamamitbhati.pokedex.model.Pokemon
 import com.iamamitbhati.pokedex.model.PokemonDetailsEntity
 import com.iamamitbhati.pokedex.model.PokemonResponse
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import retrofit2.Response
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.coroutineContext
 
 class PokemonRepositoryImpl @Inject constructor(
     private val pokemonRemoteData: PokemonRemoteData,
@@ -63,5 +65,19 @@ class PokemonRepositoryImpl @Inject constructor(
                 return pokemonDetailDao.getPokemonDetails(name)
             }
         }.asFlow(name).flowOn(ioDispatcher)
+    }
+
+    override suspend fun setFavoriteUnFavorite(name: String, isFav: Boolean) {
+        CoroutineScope(ioDispatcher).launch {
+            pokemonDao.setFavoriteUnFavorite(name, isFav)
+        }
+
+    }
+
+    override suspend fun getAllFavorite(): Flow<List<Pokemon>> {
+        return withContext(ioDispatcher) {
+            flowOf(pokemonDao.getAllFavoritePokemonList().toDomain())
+        }
+
     }
 }

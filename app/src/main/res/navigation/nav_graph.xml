@@ -13,6 +13,9 @@
         <action
             android:id="@+id/navigate_to_pokemon_detail"
             app:destination="@id/pokemon_detail" />
+        <action
+            android:id="@+id/navigation_to_fav_pokemon"
+            app:destination="@id/fav_pokemon" />
     </fragment>
 
     <fragment
@@ -26,6 +29,16 @@
         <argument
             android:name="pokemon_image"
             app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fav_pokemon"
+        android:name="com.iamamitbhati.pokedex.ui.FragmentFavorite"
+        android:label="Favourite Pokemon"
+        tools:layout="@layout/fragment_favorite">
+        <action
+            android:id="@+id/navigate_to_pokemon_detail"
+            app:destination="@id/pokemon_detail" />
     </fragment>
 
 </navigation>

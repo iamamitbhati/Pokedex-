@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import com.iamamitbhati.pokedex.MainActivity
 import com.iamamitbhati.pokedex.R
 import com.iamamitbhati.pokedex.databinding.FragmentPokemonBinding
 import com.iamamitbhati.pokedex.model.Pokemon
@@ -44,7 +45,11 @@ class FragmentPokemonList : Fragment() {
 
     private fun setupView() {
         with(binding) {
-            pokemonAdapter = PokemonAdapter(pokemons) { pokemon ->
+            pokemonAdapter = PokemonAdapter(pokemons,{ pokemon, isFav, position ->
+                mainViewModel.setFavoriteUnFavorite(pokemon.name, isFav)
+                pokemonAdapter.notifyItemChanged(position)
+            }) { pokemon ->
+                (requireActivity() as MainActivity).makeMenuUnavailable()
                 val directions = FragmentPokemonListDirections.navigateToPokemonDetail(
                     pokemon.name,
                     pokemon.getImageUrl()
@@ -52,6 +57,7 @@ class FragmentPokemonList : Fragment() {
                 findNavController().navigate(directions)
             }
             recyclerView.adapter = pokemonAdapter
+
         }
     }
 
