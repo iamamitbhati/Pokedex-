@@ -6,4 +6,5 @@
     <string name="weight">Weight</string>
     <string name="base_experience">Base Exp.</string>
     <string name="type">Type</string>
+    <string name="favorite">favourit</string>
 </resources>

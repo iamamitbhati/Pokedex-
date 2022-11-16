@@ -22,12 +22,13 @@ import com.iamamitbhati.pokedex.model.PokemonEntity.Companion.TABLE_NAME
 
 @Entity(tableName = TABLE_NAME)
 data class PokemonEntity(
-  var page: Int = 0,
-  @PrimaryKey val name: String,
-  val url: String
-)
-{
-  companion object {
-    const val TABLE_NAME = "pokemon_entity"
-  }
+    var page: Int = 0,
+    @PrimaryKey val name: String,
+    val url: String,
+
+    val favorite: Boolean = false
+) {
+    companion object {
+        const val TABLE_NAME = "pokemon_entity"
+    }
 }

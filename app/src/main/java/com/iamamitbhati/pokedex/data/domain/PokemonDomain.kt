@@ -8,7 +8,8 @@ fun List<PokemonEntity>.toDomain(): List<Pokemon> {
         Pokemon(
             page = pokemonEntity.page,
             name = pokemonEntity.name,
-            url = pokemonEntity.url
+            url = pokemonEntity.url,
+            isFav = pokemonEntity.favorite
         )
     }
 }
@@ -18,7 +19,8 @@ fun List<Pokemon>.toEntity(): List<PokemonEntity> {
         PokemonEntity(
             page = pokemon.page,
             name = pokemon.name,
-            url = pokemon.url
+            url = pokemon.url,
+            favorite = pokemon.isFav
         )
     }
 }
