@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Pokedex</string>
+    <string name="retry">Retry</string>
+    <string name="post_error">An error occurred while loading the data</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="base_experience">Base Exp.</string>
+    <string name="type">Type</string>
+    <string name="favorite">favourit</string>
+</resources>
