@@ -50,6 +50,7 @@ class FragmentFavorite : Fragment() {
     }
 
     private fun setupObserver() {
+        favoriteViewModel.getFavPokemons()
         favoriteViewModel.stateChange.observe(viewLifecycleOwner) {
             binding.progressbar.visibility = View.GONE
             it?.let { list ->
