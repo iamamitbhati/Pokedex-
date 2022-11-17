@@ -14,9 +14,6 @@ import javax.inject.Inject
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(private val pokemonRepository: PokemonRepository) :
     ViewModel() {
-    init {
-        getFavPokemons()
-    }
 
     val stateChange: MutableLiveData<List<Pokemon>> = MutableLiveData()
     fun getFavPokemons() {
